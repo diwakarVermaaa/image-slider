@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slider-container {
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider {
+            width: 500%;
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            width: 20%;
+            flex-shrink: 0;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        body {
+            background-color: rgb(148, 129, 129);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img
+                    src="https://tse4.mm.bing.net/th?id=OIP.dDwLQeUl24NSDsBTKphJ4gHaEK&pid=Api&P=0&h=180"
+                    alt="g-wagon image"></div>
+            <div class="slide"><img
+                    src="https://tse1.mm.bing.net/th?id=OIP.wAUBgskWBZzhFj4l-uD57AHaE6&pid=Api&P=0&h=180"
+                    alt="Fortuner"></div>
+            <div class="slide"><img
+                    src="https://tse4.mm.bing.net/th?id=OIP.HHKWUwABEtl1hhf4RqZrbAHaE8&pid=Api&P=0&h=180"
+                    alt="Land cruiser"></div>
+            <div class="slide"><img
+                    src="https://tse4.mm.bing.net/th?id=OIP.dOuHar6xQ-Utbam3vGMBKQHaE6&pid=Api&P=0&h=180" alt="java">
+            </div>
+            <div class="slide"><img
+                    src="https://mediacloud.carbuyer.co.uk/image/private/s--Tz6aGUgA--/v1579627451/carbuyer/range-rover-autobiography.jpg"
+                    alt="Range Rover Autobiography"></div>
+            <div class="slide"><img src="https://www.motorweek.org/images/this_just_in/2021_Maybach_SClass_Front.jpg"
+                    alt="Maybach"></div>
+
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </div>
+
+    <script>
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        let counter = 0;
+        const slideWidth = slides[0].clientWidth;
+
+        function slide(direction) {
+            if (direction === 'next') {
+                counter++;
+            } else if (direction === 'prev') {
+                counter--;
+            }
+            if (counter < 0) {
+                counter = slides.length - 1;
+            } else if (counter >= slides.length) {
+                counter = 0;
+            }
+            slider.style.transform = `translateX(-${counter * slideWidth}px)`;
+        }
+
+        prevBtn.addEventListener('click', () => slide('prev'));
+        nextBtn.addEventListener('click', () => slide('next'));
+    </script>
+
+</body>
+
+</html>
